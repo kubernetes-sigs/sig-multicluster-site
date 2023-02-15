@@ -1,16 +1,6 @@
-# Kubernetes Template Project
+# SIG-Multicluster website
 
-The Kubernetes Template Project is a template for starting new projects in the GitHub organizations owned by Kubernetes. All Kubernetes projects, at minimum, must have the following files:
-
-- a `README.md` outlining the project goals, sponsoring sig, and community contact information
-- an `OWNERS` with the project leads listed as approvers ([docs on `OWNERS` files][owners])
-- a `CONTRIBUTING.md` outlining how to contribute to the project
-- an unmodified copy of `code-of-conduct.md` from this repo, which outlines community behavior and the consequences of breaking the code
-- a `LICENSE` which must be Apache 2.0 for code projects, or [Creative Commons 4.0] for documentation repositories, without any custom content
-- a `SECURITY_CONTACTS` with the contact points for the Product Security Team 
-  to reach out to for triaging and handling of incoming issues. They must agree to abide by the
-  [Embargo Policy](https://git.k8s.io/security/private-distributors-list.md#embargo-policy)
-  and will be removed and replaced if they violate that agreement.
+This repo holds and hosts the site for SIG-Multicluster, a special interest group of the Kubernetes project.
 
 ## Community, discussion, contribution, and support
 
@@ -27,3 +17,34 @@ Participation in the Kubernetes community is governed by the [Kubernetes Code of
 
 [owners]: https://git.k8s.io/community/contributors/guide/owners.md
 [Creative Commons 4.0]: https://git.k8s.io/website/LICENSE
+
+# Contributors
+
+## Install and run
+
+Install Python and the requirements.
+
+  ```
+    python3 -m venv venv/
+    source venv/bin/activate
+    pip install -r requirements.txt
+  ```
+
+Install the mkdocs plugins
+
+  ```
+  pip install mkdocs-awesome-pages-plugin
+  pip install mkdocs-macros-plugin
+  pip install mkdocs-redirects
+  ```
+Use the mkdocs CLI to serve a development version of the site.
+
+  ```mkdocs serve```
+
+Navigate to localhost:8000 to see the site.
+
+## Build and deploy
+
+Use the mkdocs CLI to deploy to the `gh-pages` branch of the repo.
+
+   ```mkdocs gh-deploy```
