@@ -22,26 +22,17 @@ Participation in the Kubernetes community is governed by the [Kubernetes Code of
 
 ## Install and run
 
-Install Python and the requirements.
+Install Python and the requirements for this site using the included `Makefile`.
 
   ```
-    python3 -m venv venv/
-    source venv/bin/activate
-    pip install -r requirements.txt
+    make install
   ```
 
-Install the mkdocs plugins
-
-  ```
-  pip install mkdocs-awesome-pages-plugin
-  pip install mkdocs-macros-plugin
-  pip install mkdocs-redirects
-  ```
 Use the mkdocs CLI to serve a development version of the site.
 
   ```mkdocs serve```
 
-Navigate to localhost:8000 to see the site.
+Navigate to `localhost:8000` to see the site.
 
 ## Build and deploy
 
