@@ -3,23 +3,3 @@
     command = "make docs"
     publish = "site"
     environment = { PYTHON_VERSION = "3.8" }
-
-# Standard Netlify redirects
-[[redirects]]
-    from = "https://main--kubernetes-sigs-multicluster.netlify.com/*"
-    to = "https://main.multicluster.sigs.k8s.io/:splat"
-    status = 301
-    force = true
-
-# HTTP-to-HTTPS rules
-[[redirects]]
-    from = "http://main.multicluster.sigs.k8s.io/*"
-    to = "https://main.multicluster.sigs.k8s.io/:splat"
-    status = 301
-    force = true
-
-[[redirects]]
-    from = "http://main--kubernetes-sigs-multicluster.netlify.com/*"
-    to = "http://main.multicluster.sigs.k8s.io/:splat"
-    status = 301
-    force = true
