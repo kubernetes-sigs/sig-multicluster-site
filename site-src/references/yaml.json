@@ -1,0 +1,107 @@
+{
+	"Work": {
+		"prefix": ["Work"],
+		"body": [
+			"apiVersion: multicluster.x-k8s.io/v1alpha1", 
+			"kind: Work", 
+			"metadata:",
+				"\tname: ${1:work-name}",
+				"\tnamespace: ${2:cluster-name}",
+			"spec:",
+				"\tworkload:",
+				"\t\tmanifests:",
+				"\t\t- apiVersion: v1",
+				"\t\t  kind: $3",
+				"\t\t  metadata: $4",
+				"\t\t  namespace: $5"
+		],
+		"description": "Work object as described in the Work API (https://github.com/kubernetes-sigs/work-api)"
+	},
+	"ServiceImport": {
+		"prefix": ["ServiceImport"],
+		"body": [
+			"apiVersion: multicluster.x-k8s.io/v1alpha1", 
+			"kind: ServiceImport", 
+			"metadata:",
+				"\tname: ${1:service-name}",
+				"\tnamespace: ${2:demo}",
+			"spec:",
+				"\ttype: ${3:ClusterSetIP}",
+				"\tips:",
+				"\t- ${4:1.2.3.4}",
+				"\tports:",
+				"\t- name: ${5:http}",
+				"\t  protocol: TCP",
+				"\t  port: ${6:80}"
+		],
+		"description": "ServiceImport object as described in the Multicluster API (https://github.com/kubernetes-sigs/mcs-api/)"
+	},
+	"ServiceExport": {
+		"prefix": ["ServiceExport"],
+		"body": [
+			"apiVersion: multicluster.x-k8s.io/v1alpha1", 
+			"kind: ServiceExport", 
+			"metadata:",
+				"\tname: ${1:service-name}",
+				"\tnamespace: ${2:demo}"
+		],
+		"description": "ServiceImport object as described in the Multicluster API (https://github.com/kubernetes-sigs/mcs-api/)"
+	},
+	"EndPointSlice": {
+		"prefix": ["EndPointSlice"],
+		"body": [
+			"apiVersion: discovery.k8s.io/v1beta1", 
+			"kind: EndPointSlice", 
+			"metadata:",
+				"\tname: ${1:imported-service-cluster-name}",
+				"\tnamespace: ${2:demo}",
+				"\tlabels:",
+				"\t\tmulticluster.kubernetes.io/source-cluster: us-west2-a-my-cluster",
+				"\t\tmulticluster.kubernetes.io/service-name: my-svc",
+				"\townerReferences:",
+				"\t- apiVersion: multicluster.k8s.io/v1alpha1",
+				"\t  controller: false",
+				"\t  kind: ServiceImport",
+				"\t  name: my-svc",
+			"addressType: ${3:IPv4}",
+			"ports:",
+			"\t- name: http",
+			"\t  protocol: TCP",
+			"\t  port: ${4:80}",
+			"endpoints:",
+			"\t- addresses:",
+			"\t\t- ${5:10.1.2.3}",
+			"\t  conditions:",
+			"\t\t  ready: true",
+			"\t  hostname: ${6:pod-1}",
+			"\t  nodeName: ${7:node-1}",
+			"\t  zone: ${8:us-west2-a}"
+		],
+		"description": "EndPointSlice object as described in https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/"
+	},
+	"ClusterSet (About API)": {
+		"prefix": ["ClusterSet"],
+		"body": [
+			"apiVersion: about.k8s.io/v1", 
+			"kind: ClusterProperty", 
+			"metadata:",
+				"\tname: clusterset.k8s.io",
+			"spec:",
+				"\tvalue: ${1:clusterset-1}"
+		],
+		"description": "ClusterSet object as described in the About API (https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid)"
+	},
+	"Cluster (About API)": {
+		"prefix": ["Cluster"],
+		"body": [
+			"apiVersion: about.k8s.io/v1",
+			"kind: ClusterProperty",
+			"metadata:",
+				"\tname: cluster.clusterset.k8s.io",
+			"spec:",
+				"\tvalue: ${1:cluster-1}"
+		],
+		"description": "Cluster object as described in the About API (https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid)"
+	}
+
+}
