@@ -9,6 +9,7 @@ Implementors and integrators of Multicluster API are encouraged to update this d
 - [Google Cloud MCS][gke-mcs]: General Availability
 - [Submariner][submariner]: 0.13.3
 - [MCS controller for AWS Cloudmap][aws-mcs]: Alpha
+- [Antrea Multi-cluster][antrea-mcs]: Alpha
 
 ## Implementations
 
@@ -48,3 +49,17 @@ Please follow this [guide][aws-mcs-guide] for the first steps to set up the mult
 [kep-1645]: https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api
 [kep-2149]: https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid
 
+### Antrea Multi-cluster
+
+[Antrea][antrea] is an open-source project which is a Kubernetes networking solution intended to be Kubernetes native. It operates at Layer 3/4 to provide networking and security services for a Kubernetes cluster, leveraging Open vSwitch as the networking data plane.
+
+[Antrea Multi-cluster][antrea-mcs-arch] implements Multi-cluster Service API, which allows users to create multi-cluster Services that can be accessed cross clusters in a ClusterSet. Antrea Multi-cluster also extends Antrea native NetworkPolicy to support [Multi-cluster NetworkPolicy][antrea-mcs-anp] rules that apply to cross-cluster traffic, and [ClusterNetworkPolicy replication][antrea-mcs-cnp-replica] that allows a ClusterSet admin to create ClusterNetworkPolicies which are replicated across the entire ClusterSet and enforced in all member clusters.
+
+Please follow this [guide][antrea-mcs-user-guide] for the first steps to set up Antrea Multi-cluster.
+
+[antrea]: https://antrea.io/
+[antrea-mcs]: https://github.com/antrea-io/antrea/tree/main/multicluster
+[antrea-mcs-arch]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/architecture.md
+[antrea-mcs-cnp-replica]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/user-guide.md#clusternetworkpolicy-replication
+[antrea-mcs-anp]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/user-guide.md#multi-cluster-networkpolicy
+[antrea-mcs-user-guide]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/user-guide.md
