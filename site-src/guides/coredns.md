@@ -1,6 +1,6 @@
 # Configuring CoreDNS with the multicluster option
 
-The [CoreDNS multicluster plugin](https://coredns.io/explugins/multicluster/) is necessary to be able to reference multicluster services properly. By default, [CoreDNS](https://coredns.io/) does not include this plugin and it is therefore necessary to recompile CoreDNS to build a container image enabling this fonctionality.
+The [CoreDNS multicluster plugin](https://coredns.io/explugins/multicluster/) is necessary to be able to reference multicluster services properly. By default, [CoreDNS](https://coredns.io/) does not include this plugin and it is therefore necessary to recompile CoreDNS to build a container image enabling this functionality.
 The following paragraphs highlight how one can re-deploy CoreDNS with the [multicluster plugin](https://coredns.io/explugins/multicluster/). To illustrate the concepts, it has been chosen to use a Kind cluster with its default configuration.
 
 ## Step 1: Deploying a Kind cluster and checking its CoreDNS configuration
@@ -108,9 +108,9 @@ Other plugins:
 This list is important as we will use it and just add the multicluster plugin to recompile CoreDNS.
 
 ## Re-compiling CoreDNS
-The easiest way to recompile CoreDNS and generate a new container image is to use the instructions on the [official CoreDNS source repository](https://github.com/coredns/coredns#compilation-from-source). We specifically recommend the compilation with Docker which includes a read-to-use Go environment.
+The easiest way to recompile CoreDNS and generate a new container image is to use the instructions on the [official CoreDNS source repository](https://github.com/coredns/coredns#compilation-from-source). We specifically recommend the compilation with Docker which includes a ready-to-use Go environment.
 
-Prior to trigger the compilation, it is necessary to modify the `plugin.cfg` file. First, it is highly recommended to keep the same plugins as the ones found in the previous paragraph.
+Prior to triggering the compilation, it is necessary to modify the `plugin.cfg` file. First, it is highly recommended to keep the same plugins as the ones found in the previous paragraph.
 Second, it is necessary to add the following instruction right **after** the `kubernetes:kubernetes` line:
 ```
 ...
