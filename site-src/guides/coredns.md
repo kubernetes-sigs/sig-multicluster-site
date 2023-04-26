@@ -1,6 +1,6 @@
 # Configuring CoreDNS with the multicluster option
 
-The [CoreDNS multicluster plugin](https://coredns.io/explugins/multicluster/) is necessary to be able to reference multicluster services properly. By default, [CoreDNS](https://coredns.io/) does not include this plugin and it is therefore necessary to recompile CoreDNS to build a container image enabling this functionality.
+There is a ready made [CoreDNS multicluster plugin](https://coredns.io/explugins/multicluster/) you can use as the DNS component against MCS API implementations using EndpointSlices. By default, [CoreDNS](https://coredns.io/) does not include this plugin and it is therefore necessary to recompile CoreDNS to build a container image enabling this functionality.
 The following paragraphs highlight how one can re-deploy CoreDNS with the [multicluster plugin](https://coredns.io/explugins/multicluster/). To illustrate the concepts, it has been chosen to use a Kind cluster with its default configuration.
 
 ## Step 1: Deploying a Kind cluster and checking its CoreDNS configuration
