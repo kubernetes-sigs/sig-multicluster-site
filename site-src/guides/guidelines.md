@@ -1,77 +1,63 @@
 # Implementation guidelines
 
-There are some general design guidelines used throughout these APIs.
+There are some general guidelines for implementers of SIG-Multicluster sponsored
+APIs.
 
-!!! note
-    Throughout the Multicluster API documentation and specification,
-    keywords such as "MUST", "MAY", and "SHOULD" are used
-    broadly. These should be interpreted as described in RFC 2119.
 
-## Single resource consistency
+## Conformance Expectations
 
-The Kubernetes API guarantees consistency only on a single resource level. There
-are a couple of consequences for complex resource graphs as opposed to single
-resources:
+We expect there will be varying levels of conformance among the different
+providers for some time. SIG-Multicluster is currently working on the framework
+for a conformance suite so implementations can test their conformance to the API
+specifications in an automated way. For now, each individual KEP indicates what
+a conformant implementation of a given API  "MUST", "MAY", and "SHOULD" adhere
+to, following the interpretations of those terms as described in RFC 2119.
 
-*   Error checking of properties spanning multiple resource will be asynchronous
-    and eventually consistent. Simple syntax checks will be possible at the
-    single resource level, but cross resource dependencies will need to be
-    handled by the controller.
-*   Controllers will need to handle broken links between resources and/or
-    mismatched configuration.
 
-## Conflicts
+### Implementation-specific
 
-Separation and delegation of responsibility among independent actors (e.g.
-between cluster ops and application developers) can result in conflicts in the
-configuration. For example, two application teams may inadvertently submit
-configuration for the same HTTP path.
+In some aspects of the APIs, the specification provides the general user usage
+pattern of a feature, however, the exact behavior may depend on the underlying
+implementation. When known, these are called out in the KEP as implementation
+details to clearly distinguish between conformance expectations and the
+variations in behavior that are considered "implementation-specific".
 
-In most cases, guidance for conflict resolution is provided along with the
-documentation for fields that may have a conflict. If a conflict does not have a
-prescribed resolution, the following guiding principles should be applied:
 
-* Prefer not to break things that are working.
-* Drop as little traffic as possible.
-* Provide a consistent experience when conflicts occur.
-* Make it clear which path has been chosen when a conflict has been identified.
-  Where possible, this should be communicated by setting appropriate status
-  conditions on relevant resources.
-* More specific matches should be given precedence over less specific ones.
-* The resource with the oldest creation timestamp wins.
-* If everything else is equivalent (including creation timestamp), precedences
-  should be given to the resource appearing first in alphabetical order
-  (namespace/name). For example, foo/bar would be given precedence over foo/baz.
+## API Conventions
 
-## Gracefully Handling Future API Versions
+SIG-Multicluter sponsored APIs follow Kubernetes API [conventions]. These
+conventions are intended to ease client development and ensure that
+configuration mechanisms can consistently be implemented across a diverse set of
+use cases. 
 
-An important consideration when implementing this API is how it might change in
-the future. Similar to the Ingress API before it, this API is designed to be
-implemented by a variety of different products within the same cluster. That
-means that the API version your implementation was developed with may be
-different than the API version it is used with. At a minimum, the following
-requirements must be met to ensure future versions of the API do not break your
-implementation:
+[conventions]:(https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md)
 
-* Handle fields with loosened validation without crashing
-* Handle fields that have transitioned from required to optional without
-  crashing
+
+## API Process
+
+SIG-Multicluster sponsored APIs are communicated and matured via the [Kubernetes
+Enhancements Proposal process][KEPs], regardless of whether they are implemented as
+part of a Kubernetes release. SIG-sponsored artifacts such as conformance tests,
+published CRD yaml, or related images or software are published in repos in the
+[Kubernetes-sigs Github organization][kubernetes-sigs].
+
+[KEPs]: (https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster)
+[kubernetes-sigs]: (https://github.com/kubernetes-sigs/)
 
 ## Limitations of CRD and Webhook Validation
 
 CRD and webhook validation is not the final validation i.e. webhook is "nice UX"
 but not schema enforcement. This validation is intended to provide immediate
 feedback to users when they provide an invalid configuration. Write code
-defensively with the assumption that at least some invalid input (Multicluster/About/Work API
-resources) will reach your controller. Both Webhook and CRD validation is not
-fully reliable because it:
+defensively with the assumption that at least some invalid input will reach your
+controller. Both Webhook and CRD validation is not fully reliable because it:
 
 * May not be deployed correctly.
 * May be loosened in future API releases. (Fields may contain values with less
   restrictive validation in newer versions of the API). 
 
-*Note: These limitations are not unique to Multicluster API and apply more broadly to
-any Kubernetes CRDs and webhooks.*
+*Note: These limitations are not unique to SIG-Multicluster sponsored APIs and
+apply more broadly to any Kubernetes CRDs and webhooks.*
 
 Implementers should ensure that, even if unexpected values are encountered in
 the API, their implementations are still as secure as possible and handle this
@@ -79,44 +65,3 @@ input gracefully. The most common response would be to reject the configuration
 as malformed and signal the user via a condition in the status block. To avoid
 duplicating work, Multicluster API maintainers are considering adding a shared
 validation package that implementations can use for this purpose.
-
-### Expectations
-
-We expect there will be varying levels of conformance among the
-different providers in the early days of this API. Users can use the
-results of the conformance tests to understand areas where there may
-be differences in behavior from the spec.
-
-### Implementation-specific
-
-In some aspects of the APIs, we give the user an ability to specify usage of the
-feature, however, the exact behavior may depend on the underlying
-implementation. For example, regular expression matching is present in all
-implementations but specifying an exact behavior is impossible due to
-subtle differences between the underlying libraries used (e.g. PCRE, ECMA,
-Re2). It is still useful for our users to spec out the feature as much as
-possible, but we acknowledge that the behavior for some subset of the API may
-still vary (and that's ok).
-
-These cases will be specified as defining delimited parts of the API
-"implementation-specific".
-
-
-## Kind vs. Resource
-
-Similar to other Kubernetes APIs, Multicluster, Work and About APIs use "Kind" instead of "Resource"
-in object references throughout the API. This pattern should be familiar to
-most Kubernetes users.
-
-Per the [Kubernetes API Conventions][1], this means that all implementations of
-this API should have a predefined mapping between kinds and resources. Relying
-on dynamic resource mapping is not safe.
-
-## API Conventions
-
-The Multicluster, About and Work APIs follow [Kubernetes API Conventions][1]. These conventions
-are intended to ease client development and ensure that configuration
-mechanisms can consistently be implemented across a diverse set of use
-cases. 
-
-[1]: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md
