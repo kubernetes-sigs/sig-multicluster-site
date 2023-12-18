@@ -4,13 +4,13 @@ Since its inception in 2015, Kubernetes has been pretty successful at popularizi
 
 SIG-Multicluster is a [Special Interest Group][sig-multicluster-github] focused on solving common challenges related to the management of multiple Kubernetes clusters, and applications that exist therein. 
 
-Specifically, the SIG aims to fine Kubernetes-native ways to:
+Specifically, the SIG aims to find Kubernetes-native ways to:
 
 * Expose workloads from multiple clusters to each other
 * Share cluster metadata and its place relative to others
 * Generally break down the walls between clusters
 
-The SIG is responsible for designing, discussing, implementing and maintaining API’s, tools and documentation related to multi-cluster administration and application management. This includes not only active automated approaches such as Cluster Federation, but also those that employ batch workflow-style continuous deployment systems like Spinnaker and others. Standalone building blocks for these and other similar systems (for example a cluster registry), and proposed changes to kubernetes core where appropriate will also be in scope.
+The SIG is responsible for designing, discussing, implementing and maintaining APIs, tools and documentation related to multi-cluster administration and application management. This includes not only active automated approaches such as Cluster Federation, but also those that employ batch workflow-style continuous deployment systems like Spinnaker and others. Standalone building blocks for these and other similar systems (for example a cluster registry), and proposed changes to kubernetes core where appropriate will also be in scope.
 
 ## Problem statement: why multicluster?
 
@@ -37,7 +37,7 @@ There are many reasons to want to run multiple clusters, including but not limit
 ## Project charter
 The following charter defines the scope and governance of the [Multicluster Special Interest Group][sig-multicluster-github]:
 
-* Support an out-of-tree ecosystem by defining API standards that leave plenty of rool for flexibility in their ultimately third party implementation.
+* Support an out-of-tree ecosystem by defining API standards that leave plenty of room for flexibility in their ultimately third party implementation.
 
 * Protect the known multicluster experience from incompatible changes upstream to single clusters by working with other [SIGs][sigs-github].
 

@@ -22,7 +22,7 @@ resources:
 
 ## Conflicts
 
-Separation and delegation of responsibility among independent actors (e.g
+Separation and delegation of responsibility among independent actors (e.g.
 between cluster ops and application developers) can result in conflicts in the
 configuration. For example, two application teams may inadvertently submit
 configuration for the same HTTP path.
