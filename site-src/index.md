@@ -55,6 +55,7 @@ To meet the goals listed above, the SIG-Multicluster team has worked to define t
 * [About API][about-api-reference]: allows to uniquely identify clusters within a set of clusters ([clusterset][clusterset-definition])
 * [Multicluster Services API][mc-api-reference]: allows to expose services across clusters which are part of a given [clusterset][clusterset-definition].
 * [Work API][work-api-reference]: allows to define the workloads to be deployed across clusters which are part of a given [clusterset][clusterset-definition].
+* [ClusterInventory API](https://github.com/kubernetes/enhancements/pull/4323/): simplifies the discovery and management of clusters, offering a comprehensive status overview for both applications and human operators. Work in progress.
 
 [about-api-reference]: ./concepts/about-api.md
 [mc-api-reference]: ./concepts/multicluster-services-api.md
