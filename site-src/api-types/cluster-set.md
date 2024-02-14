@@ -9,7 +9,7 @@ ClusterSet represents a specific pattern implemented by various organizations. A
     - Namespaces don't have to exist in every cluster, but behave the same across those in which they do.
 
 !!!note
-        The early definition of the ClusterSet was described in [KEP-2149](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid). It is now part of the [About API](https://sigs.k8s.io/about-api).
+    The early definition of the ClusterSet was described in [KEP-2149](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid). It is now part of the [About API](https://sigs.k8s.io/about-api).
 
 A cluster's ClusterSet membership is stored in the about.k8s.io/ClusterProperty `clusterset.k8s.io`.
 

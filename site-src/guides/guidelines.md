@@ -22,7 +22,7 @@ resources:
 
 ## Conflicts
 
-Separation and delegation of responsibility among independent actors (e.g
+Separation and delegation of responsibility among independent actors (e.g.
 between cluster ops and application developers) can result in conflicts in the
 configuration. For example, two application teams may inadvertently submit
 configuration for the same HTTP path.
@@ -108,13 +108,15 @@ Similar to other Kubernetes APIs, Multicluster, Work and About APIs use "Kind" i
 in object references throughout the API. This pattern should be familiar to
 most Kubernetes users.
 
-Per the [Kubernetes API conventions][1], this means that all implementations of
+Per the [Kubernetes API Conventions][1], this means that all implementations of
 this API should have a predefined mapping between kinds and resources. Relying
 on dynamic resource mapping is not safe.
 
 ## API Conventions
 
-The Multicluster, About and Work APIs follow Kubernetes API [conventions][1]. These conventions
+The Multicluster, About and Work APIs follow [Kubernetes API Conventions][1]. These conventions
 are intended to ease client development and ensure that configuration
 mechanisms can consistently be implemented across a diverse set of use
 cases. 
+
+[1]: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md

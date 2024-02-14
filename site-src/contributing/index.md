@@ -30,7 +30,7 @@ you can get help with your specific implementation.
 Major discussions and notifications will be sent on the [SIG-MC mailing
 list][sigmcg].
 
-We also have a [Slack channel (sig-multicluster)][slack] on k8s.io for day-to-day questions, discussions.
+We also have a [Slack channel (sig-multicluster)][slack] on k8s.io for day-to-day questions and discussions.
 
 [sigmcg]: https://groups.google.com/forum/#!forum/kubernetes-sig-multicluster
 [slack]: https://kubernetes.slack.com/archives/C09R1PJR3
