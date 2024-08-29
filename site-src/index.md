@@ -50,17 +50,18 @@ The following charter defines the scope and governance of the [Multicluster Spec
 
 ## Approach
 
-To meet the goals listed above, the SIG-Multicluster team has worked to define three different APIs:
+To meet the goals listed above, the SIG-Multicluster team has worked to define four different APIs:
 
 * [About API][about-api-reference]: allows to uniquely identify clusters within a set of clusters ([clusterset][clusterset-definition])
 * [Multicluster Services API][mc-api-reference]: allows to expose services across clusters which are part of a given [clusterset][clusterset-definition].
 * [Work API][work-api-reference]: allows to define the workloads to be deployed across clusters which are part of a given [clusterset][clusterset-definition].
-* [ClusterInventory API](https://github.com/kubernetes/enhancements/pull/4323/): simplifies the discovery and management of clusters, offering a comprehensive status overview for both applications and human operators. Work in progress.
+* [ClusterProfile API][clusterprofile-reference]: simplifies the discovery and management of clusters, offering a comprehensive status overview for both applications and human operators.
 
 [about-api-reference]: ./concepts/about-api.md
 [mc-api-reference]: ./concepts/multicluster-services-api.md
 [work-api-reference]: ./concepts/work-api.md
 [clusterset-definition]: ./api-types/cluster-set.md
+[clusterprofile-reference]: ./concepts/cluster-profile-api.md
 
 To leave room for implementation, SIG-Multicluster does not focus on the implementation of the mechanisms that rely on those APIs. For example, no reference implementation is provided for a cluster registry or for service discovery itself.
 
