@@ -1,6 +1,6 @@
 # ClusterProfile API Overview
 
-This document provides an overview of the ClusterProfile (fka ClusterInventory) API.
+This document provides an overview of the [ClusterProfile API](https://github.com/kubernetes-sigs/cluster-inventory-api?tab=readme-ov-file#cluster-profile-api).
 
 ![Alt](../images/cluster-profile-api.png "ClusterProfile API")
 
