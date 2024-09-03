@@ -4,9 +4,8 @@ This page contains links to all of the meeting notes, design docs and related di
 
 ## Feedback and Questions
 
-For general feedback, questions or to share ideas please feel free to [create a
-new discussion against the site repo][gh-disc].
-[gh-disc]:https://github.com/lauralorenz/sig-multicluster-site-proposal/discussions/new
+For general feedback, questions or to share ideas please reach out in [SIG-Multicluster-Slack][slack-channel].
+[slack-channel]:https://kubernetes.slack.com/archives/C09R1PJR3
 
 ## Bug Reports
 
