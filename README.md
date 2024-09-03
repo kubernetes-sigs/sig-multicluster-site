@@ -1,6 +1,7 @@
 # SIG-Multicluster website
 
-This repo holds and hosts the site for SIG-Multicluster, a special interest group of the Kubernetes project.
+This repo holds and hosts the site for [SIG-Multicluster](https://multicluster.sigs.k8s.io/),
+a special interest group of the Kubernetes project.
 
 ## Community, discussion, contribution, and support
 
