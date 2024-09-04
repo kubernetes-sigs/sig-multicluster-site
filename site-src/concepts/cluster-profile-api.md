@@ -4,15 +4,17 @@ This document provides an overview of the [ClusterProfile API](https://github.co
 
 ![Alt](../images/cluster-profile-api.png "ClusterProfile API")
 
-A Cluster Profile is essentially an individual member of the Cluster Inventory that details the properties and status of a cluster.
-This API proposes a universal, standardized interface that defines how cluster information should be presented
+A Cluster Profile is a namespace-level resource and essentially represents an individual member of the Cluster Inventory
+that details properties and status of a cluster. This API proposes a standardized interface that defines how cluster information should be presented
 and interacted with across different platforms and implementations.
 
 You can read more details about the API in the [KEP-4322](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md).
 
 ## Terminology
 
-- **Cluster Inventory**: A conceptual term referring to a collection of clusters.
+- **Cluster Inventory**: A conceptual term referring to a collection of clusters. A cluster inventory may or may not represent
+a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a clusterSet if all its member clusters adhere to the 
+[namespace sameness](https://github.com/kubernetes/community/blob/master/sig-multicluster/namespace-sameness-position-statement.md) principle.
 
 - **Cluster Manager**: An entity that creates the ClusterProfile API object per member cluster,
   and keeps their status up-to-date. Each cluster manager MUST be identified with a unique name.  
@@ -25,6 +27,8 @@ You can read more details about the API in the [KEP-4322](https://github.com/kub
   workload distribution, operation management etc.
 
 ## API Example
+
+[CRD definition](https://github.com/kubernetes-sigs/cluster-inventory-api/blob/main/config/crd/bases/multicluster.x-k8s.io_clusterprofiles.yaml)
 
 ```yaml
 apiVersion: multicluster.x-k8s.io/v1alpha1
