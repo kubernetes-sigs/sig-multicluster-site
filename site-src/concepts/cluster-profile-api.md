@@ -34,7 +34,8 @@ a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a
 apiVersion: multicluster.x-k8s.io/v1alpha1
 kind: ClusterProfile
 metadata:
- name: generated-cluster-name
+ name: some-cluster-name
+ namespace: fleet-system
  labels:
    x-k8s.io/cluster-manager: some-cluster-manager
 spec:
