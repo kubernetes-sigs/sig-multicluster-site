@@ -39,6 +39,7 @@ nav:
       About API Overview: concepts/about-api.md
       Multicluster Services API Overview: concepts/multicluster-services-api.md
       Work API Overview: concepts/work-api.md
+      ClusterProfile API Overview: concepts/cluster-profile-api.md
   - Guides:
     - Index: guides/index.md
     - Implementation Guidelines: guides/guidelines.md
