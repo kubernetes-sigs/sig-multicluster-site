@@ -2,8 +2,8 @@
 	"Work": {
 		"prefix": ["Work"],
 		"body": [
-			"apiVersion: multicluster.x-k8s.io/v1alpha1", 
-			"kind: Work", 
+			"apiVersion: multicluster.x-k8s.io/v1alpha1",
+			"kind: Work",
 			"metadata:",
 				"\tname: ${1:work-name}",
 				"\tnamespace: ${2:cluster-name}",
@@ -20,8 +20,8 @@
 	"ServiceImport": {
 		"prefix": ["ServiceImport"],
 		"body": [
-			"apiVersion: multicluster.x-k8s.io/v1alpha1", 
-			"kind: ServiceImport", 
+			"apiVersion: multicluster.x-k8s.io/v1alpha1",
+			"kind: ServiceImport",
 			"metadata:",
 				"\tname: ${1:service-name}",
 				"\tnamespace: ${2:demo}",
@@ -39,8 +39,8 @@
 	"ServiceExport": {
 		"prefix": ["ServiceExport"],
 		"body": [
-			"apiVersion: multicluster.x-k8s.io/v1alpha1", 
-			"kind: ServiceExport", 
+			"apiVersion: multicluster.x-k8s.io/v1alpha1",
+			"kind: ServiceExport",
 			"metadata:",
 				"\tname: ${1:service-name}",
 				"\tnamespace: ${2:demo}"
@@ -50,8 +50,8 @@
 	"EndPointSlice": {
 		"prefix": ["EndPointSlice"],
 		"body": [
-			"apiVersion: discovery.k8s.io/v1beta1", 
-			"kind: EndPointSlice", 
+			"apiVersion: discovery.k8s.io/v1beta1",
+			"kind: EndPointSlice",
 			"metadata:",
 				"\tname: ${1:imported-service-cluster-name}",
 				"\tnamespace: ${2:demo}",
@@ -82,8 +82,8 @@
 	"ClusterSet (About API)": {
 		"prefix": ["ClusterSet"],
 		"body": [
-			"apiVersion: about.k8s.io/v1", 
-			"kind: ClusterProperty", 
+			"apiVersion: about.k8s.io/v1alpha1",
+			"kind: ClusterProperty",
 			"metadata:",
 				"\tname: clusterset.k8s.io",
 			"spec:",
@@ -94,7 +94,7 @@
 	"Cluster (About API)": {
 		"prefix": ["Cluster"],
 		"body": [
-			"apiVersion: about.k8s.io/v1",
+			"apiVersion: about.k8s.io/v1alpha1",
 			"kind: ClusterProperty",
 			"metadata:",
 				"\tname: cluster.clusterset.k8s.io",
