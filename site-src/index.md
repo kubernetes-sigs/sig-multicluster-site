@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 
 Since its inception in 2015, Kubernetes has been pretty successful at popularizing the idea of container clusters.  Adoption has reached the point that many users are deploying their applications across multiple clusters and are struggling to make it work smoothly. 
 
@@ -12,7 +12,7 @@ Specifically, the SIG aims to find Kubernetes-native ways to:
 
 The SIG is responsible for designing, discussing, implementing and maintaining APIs, tools and documentation related to multi-cluster administration and application management. This includes not only active automated approaches such as Cluster Federation, but also those that employ batch workflow-style continuous deployment systems like Spinnaker and others. Standalone building blocks for these and other similar systems (for example a cluster registry), and proposed changes to kubernetes core where appropriate will also be in scope.
 
-## Problem statement: why multicluster?
+### Problem statement: why multicluster?
 
 There are many reasons to want to run multiple clusters, including but not limited to:
 
@@ -34,7 +34,7 @@ There are many reasons to want to run multiple clusters, including but not limit
     * Scale: the application is too big to fit in a single cluster.
     * Upgrade scope: some parts of the application may require an infrastructure upgrade, that may impact other parts of the application. Having multiple clusters can also avoid the need for in-place cluster upgrades.
 
-## Project charter
+### Project charter
 The following charter defines the scope and governance of the [Multicluster Special Interest Group][sig-multicluster-github]:
 
 * Support an out-of-tree ecosystem by defining API standards that leave plenty of room for flexibility in their ultimately third party implementation.
@@ -48,7 +48,7 @@ The following charter defines the scope and governance of the [Multicluster Spec
 
 
 
-## Approach
+### Approach
 
 To meet the goals listed above, the SIG-Multicluster team has worked to define four different APIs:
 
@@ -65,7 +65,7 @@ To meet the goals listed above, the SIG-Multicluster team has worked to define f
 
 To leave room for implementation, SIG-Multicluster does not focus on the implementation of the mechanisms that rely on those APIs. For example, no reference implementation is provided for a cluster registry or for service discovery itself.
 
-# Getting started
+## Getting started
 Whether you are a user interested in using the different APIs or an implementer interested in conforming to the APIs, the following resources will help give you the necessary background:
 
 * [KubeCon NA 2022 "SIG-Multicluster Intro and Deep Dive"][kubecon-na-2022-video] by Laura Lorenz (Google), Jeremy Olmsted-Thompson (Google) and Paul Morie (Apple) 
@@ -79,7 +79,19 @@ Whether you are a user interested in using the different APIs or an implementer 
 
 * [Community links][get-involved]
 
-# Contributing
+### Contributing
 If you are interested in contributing to SIG-Multicluster or building an implementation of one of our APIs, then don’t hesitate to [get involved][get-involved] in SIG meetings, issues on projects, or new designs.
 
 [get-involved]: ./contributing/index.md
+
+### Read the KEPs!
+
+!!!note
+    Read more about the [Kubernetes Enhancement Proposal](https://github.com/kubernetes/enhancements/blob/master/keps/README.md)
+
+* You can check out all of the sig keps at the [sig-multicluster KEP home](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster)
+
+* [2149-clusterid](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid)
+* [4322-cluster-inventory](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md)
+* [1645-multi-cluster-service-api](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api)
+
