@@ -52,6 +52,6 @@ There is a reference implementation available in the [GitHub repo](https://githu
 
 For more advanced Work API implementations:
 
-- Open Cluster Management [ManifestWork API](https://open-cluster-management.io/concepts/manifestwork/)
+- Open Cluster Management [ManifestWork API](https://open-cluster-management.io/docs/concepts/manifestwork/)
 - Karmada [Work API](https://github.com/karmada-io/api/tree/main/work/)
 - Azure [Work API](https://github.com/Azure/k8s-work-api)
