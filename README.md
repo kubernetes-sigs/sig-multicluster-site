@@ -5,12 +5,13 @@ a special interest group of the Kubernetes project.
 
 ## Community, discussion, contribution, and support
 
-Learn how to engage with the Kubernetes community on the [community page](http://kubernetes.io/community/).
+Learn how to engage with the Multicluster Special Interest Group community on the
+[community page](https://github.com/kubernetes/community/tree/master/sig-multicluster#multicluster-special-interest-group/).
 
 You can reach the maintainers of this project at:
 
-- [Slack](https://slack.k8s.io/)
-- [Mailing List](https://groups.google.com/a/kubernetes.io/g/dev)
+- Slack: [#sig-multicluster](https://kubernetes.slack.com/messages/sig-multicluster/)
+- [Mailing list](https://groups.google.com/forum/#!forum/kubernetes-sig-multicluster/)
 
 ### Code of conduct
 
