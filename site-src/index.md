@@ -83,3 +83,14 @@ Whether you are a user interested in using the different APIs or an implementer 
 If you are interested in contributing to SIG-Multicluster or building an implementation of one of our APIs, then don’t hesitate to [get involved][get-involved] in SIG meetings, issues on projects, or new designs.
 
 [get-involved]: ./contributing/index.md
+
+## Read the KEPs!
+
+!!!note
+    Read more about the [Kubernetes Enhancement Proposal](https://github.com/kubernetes/enhancements/blob/master/keps/README.md)
+
+* You can check out all of the sig keps at the [sig-multicluster KEP home](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster)
+
+* [2149-clusterid](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid)
+* [4322-cluster-inventory](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md)
+* [1645-multi-cluster-service-api](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api)
