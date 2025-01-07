@@ -22,23 +22,23 @@ Update of a Work will trigger the resource update on the Managed Cluster, and de
 
 ## Example
 
-```
+```yaml
 apiVersion: multicluster.x-k8s.io/v1alpha1
 kind: Work
 metadata:
- name: work-sample
- namespace: cluster1
+  name: work-sample
+  namespace: cluster1
 spec:
- workload:
-   manifests:
-   - apiVersion: v1
-     kind: ConfigMap
-     metadata:
-       name: cm
-       namespace: default
-     data:
-       ui.properties: |
-         color=purple
+  workload:
+    manifests:
+    - apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: cm
+        namespace: default
+      data:
+        ui.properties: |
+          color=purple
 ```
 
 User creates a Work in the `cluster1` namespace on the Work Hub that the Work Controller is authorized to access. 

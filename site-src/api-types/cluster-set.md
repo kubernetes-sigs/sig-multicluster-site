@@ -20,37 +20,37 @@ This property can be used to:
 
 - uniquely identify clusters using a clusterID
 
-    ```
+    ```yaml
     apiVersion: about.k8s.io/v1
     kind: ClusterProperty
     metadata:
-        name: cluster.clusterset.k8s.io
+      name: cluster.clusterset.k8s.io
     spec:
-        value: cluster-1
+      value: cluster-1
     ```
 
 - uniquely identify the membership of a cluster in a ClusterSet for the lifetime of the membership.
 
-    ```
+    ```yaml
     apiVersion: about.k8s.io/v1
     kind: ClusterProperty
     metadata:
-        name: clusterset.k8s.io
+      name: clusterset.k8s.io
     spec:
-        value: mycoolclusterset
+      value: mycoolclusterset
     ```
     
 - Provide a reference point for multi-cluster tooling to build on within a cluster set, for example for DNS labels, for logging and tracing, etc.
 
 - Provide extra metadata space to store other cluster properties that might otherwise be implemented as ad-hoc annotations on semantically adjacent objects.
 
-    ```
+    ```yaml
     apiVersion: about.k8s.io/v1
     kind: ClusterProperty
     metadata:
-        name: fingerprint.mycoolimplementation.com
+      name: fingerprint.mycoolimplementation.com
     spec:
-        value:  '{"major": "1","minor": "18","gitVersion": "v1.18.2","gitCommit": "52c56ce7a8272c798dbc29846288d7cd9fbae032","gitTreeState": "clean","buildDate": "2020-04-30T20:19:45Z","goVersion": "go1.13.9","compiler": "gc","platform": "linux/amd64"}'
+      value: '{"major": "1","minor": "18","gitVersion": "v1.18.2","gitCommit": "52c56ce7a8272c798dbc29846288d7cd9fbae032","gitTreeState": "clean","buildDate": "2020-04-30T20:19:45Z","goVersion": "go1.13.9","compiler": "gc","platform": "linux/amd64"}'
     ```
 
 

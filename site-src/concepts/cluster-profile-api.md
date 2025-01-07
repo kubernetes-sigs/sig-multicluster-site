@@ -34,29 +34,29 @@ a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a
 apiVersion: multicluster.x-k8s.io/v1alpha1
 kind: ClusterProfile
 metadata:
- name: some-cluster-name
- namespace: fleet-system
- labels:
-   x-k8s.io/cluster-manager: some-cluster-manager
+  name: some-cluster-name
+  namespace: fleet-system
+  labels:
+    x-k8s.io/cluster-manager: some-cluster-manager
 spec:
   displayName: some-cluster
   clusterManager:
     name: some-cluster-manager
 status:
- version:
-   kubernetes: 1.28.0
- properties:
-   - name: clusterset.k8s.io
-     value: some-clusterset
-   - name: location
-     value: apac
- conditions:
-   - type: ControlPlaneHealthy
-     status: True
-     lastTransitionTime: "2023-05-08T07:56:55Z"
-     message: ""
-   - type: Joined
-     status: True
-     lastTransitionTime: "2023-05-08T07:58:55Z"
-     message: ""
+  version:
+    kubernetes: 1.28.0
+  properties:
+    - name: clusterset.k8s.io
+      value: some-clusterset
+    - name: location
+      value: apac
+  conditions:
+    - type: ControlPlaneHealthy
+      status: True
+      lastTransitionTime: "2023-05-08T07:56:55Z"
+      message: ""
+    - type: Joined
+      status: True
+      lastTransitionTime: "2023-05-08T07:58:55Z"
+      message: ""
 ```

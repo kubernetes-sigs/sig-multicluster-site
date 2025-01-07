@@ -265,30 +265,30 @@ cat <<EOF > dnsutils.yaml
 apiVersion: v1
 kind: Pod
 metadata:
- name: dnsutils
- namespace: demo
+  name: dnsutils
+  namespace: demo
 spec:
- containers:
- - name: dnsutils
-   image: k8s.gcr.io/e2e-test-images/jessie-dnsutils:1.3
-   command:
-     - sleep
-     - "3600"
-   imagePullPolicy: IfNotPresent
- restartPolicy: Always
- EOF
- ```
+  containers:
+  - name: dnsutils
+    image: k8s.gcr.io/e2e-test-images/jessie-dnsutils:1.3
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+EOF
+```
 
- ```
- kubectl apply -f dnsutils.yaml
- ```
+```
+kubectl apply -f dnsutils.yaml
+```
 
- You can then use the `dnsutils` pod to confirm that the DNS query for the ServiceImport responds with the IP set in the fake ServiceImport previously defined.
+You can then use the `dnsutils` pod to confirm that the DNS query for the ServiceImport responds with the IP set in the fake ServiceImport previously defined.
 
- ```
- kubectl exec -it dnsutils -n demo -- bash
- ```
- ```
+```
+kubectl exec -it dnsutils -n demo -- bash
+```
+```
 root@dnsutils:/# nslookup myservice.demo.svc.clusterset.local
 ```
 **Output (Do Not Copy)**
