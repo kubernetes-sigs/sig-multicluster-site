@@ -15,7 +15,7 @@ The ClusterProperty CRD is proposed to give a Kubernetes-native way of identifyi
 
 ### Example
 
-```
+```yaml
 apiVersion: about.k8s.io/v1
 kind: ClusterProperty
 metadata:
