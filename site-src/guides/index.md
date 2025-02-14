@@ -10,6 +10,7 @@ Implementors and integrators of Multicluster API are encouraged to update this d
 - [Submariner][submariner]: 0.13.3
 - [MCS controller for AWS Cloudmap][aws-mcs]: Alpha
 - [Antrea Multi-cluster][antrea-mcs]: Alpha
+- [Cilium Cluster Mesh][cilium-clustermesh]: Beta (from Cilium v1.17)
 
 ## Implementations
 
@@ -63,3 +64,15 @@ Please follow this [guide][antrea-mcs-user-guide] for the first steps to set up 
 [antrea-mcs-cnp-replica]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/user-guide.md#clusternetworkpolicy-replication
 [antrea-mcs-anp]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/user-guide.md#multi-cluster-networkpolicy
 [antrea-mcs-user-guide]: https://github.com/antrea-io/antrea/blob/main/docs/multicluster/user-guide.md
+
+### Cilium Cluster Mesh
+
+[Cilium][cilium] is an open source, cloud native solution for providing, securing, and observing network connectivity between workloads, fueled by the Kernel technology eBPF.
+
+[Cilium Cluster Mesh][cilium-clustermesh] allows you to connect the networks of multiple clusters in such as way that pods in each cluster can discover and access services in all other clusters of the mesh, provided all the clusters run Cilium as their CNI. This allows effectively joining multiple clusters into a large unified network, regardless of the Kubernetes distribution or location each of them is running.
+
+Starting with Cilium version 1.17, Cilium Cluster Mesh also supports MCS-API; see the corresponding [guide][cilium-mcs] for more information!
+
+[cilium]: https://cilium.io/
+[cilium-clustermesh]: https://cilium.io/use-cases/cluster-mesh/
+[cilium-mcs]: https://docs.cilium.io/en/stable/network/clustermesh/mcsapi/
