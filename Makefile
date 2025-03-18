@@ -13,27 +13,26 @@
 # limitations under the License.
 SHELL := /bin/bash
 
+all: docs
+
 # Install dependencies
 .PHONY: install
 install:
 	# Create python virtual environment
 	python3 -m venv venv/
 
-	# Active virtual environment
-	source ./venv/bin/activate
-
-	# Install python depdendencies
-	pip install -r requirements.txt
+	# Activate virtual environment and install dependencies
+	source ./venv/bin/activate && pip install -r requirements.txt
 
 
-# Build the documentation.
+# Build the documentation
 .PHONY: docs
-docs:
+docs: install
 	# Ensure site dir exists
 	mkdir -p site
 
 	# Generate docs with mkdocs
-	mkdocs build
+	source ./venv/bin/activate && mkdocs build
 
 
 # Cleanup local directory
