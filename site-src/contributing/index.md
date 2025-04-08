@@ -38,7 +38,7 @@ We also have a [Slack channel (sig-multicluster)][slack] on k8s.io for day-to-da
 
 ## Meetings
 
-Meetings discussing the evolution of the different APIs on SIG-Multicluster happen bi-weekly on Tuesdays at 9:30AM Pacific Time / 18:30 CET. Join kubernetes-sig-multicluster@googlegroups.com to get a calendar invite. 
+Meetings discussing the evolution of the different APIs on SIG-Multicluster happen weekly on Tuesdays at 9:30AM Pacific Time / 18:30 CET. Join kubernetes-sig-multicluster@googlegroups.com to get a calendar invite. 
 
 
 <iframe
