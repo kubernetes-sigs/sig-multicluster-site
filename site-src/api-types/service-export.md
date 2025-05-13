@@ -10,5 +10,5 @@ If multiple clusters export a Service with the same namespaced name, they will b
 ## DNS
 When a ServiceExport is created, this will cause a domain name for the multi-cluster service to become accessible from within the ClusterSet. The domain name will be `<service-export-name>.<service-export-namespace>.svc.clusterset.local`.
 
-## EndPointSlice
+## EndpointSlice
 When a ServiceExport is created, this will cause EndpointSlice objects for the underlying Service to be created in each cluster within the ClusterSet. One or more EndpointSlice resources will exist for each cluster that exported the Service, with each EndpointSlice containing only endpoints from its source cluster. These EndpointSlice objects are  marked as managed by the ClusterSet service controller, so that the endpoint slice controller doesn’t delete them.
