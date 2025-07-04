@@ -1,5 +1,17 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+reviewers:
+  - jeremyot
+  - lauralorenz
+  - skitt
+  - MrFreezeex
+  - munnerz
+  - RainbowMango
+  - ryanzhang-oss
+# Pending org membership
+# - corentone
+# - jnpacker
+
 approvers:
   - jeremyot
   - lauralorenz
