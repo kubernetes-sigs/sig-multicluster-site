@@ -43,6 +43,8 @@ nav:
   - Guides:
     - Index: guides/index.md
     - Implementation Guidelines: guides/guidelines.md
+  - Glossary:
+    - Index: references/glossary/index.md
   - Reference:
     - Namespace Sameness: concepts/namespace-sameness.md
     - ClusterSet: api-types/cluster-set.md
