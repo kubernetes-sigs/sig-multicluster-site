@@ -15,6 +15,7 @@ Bug reports should be filed as Github Issues on their respective subproject repo
 * [Open an issue for a bug with the MCS API][mcs-api-issues]
 * [Open an issue for a bug with the Work API][work-api-issues]
 * [Open an issue for a bug with the ClusterProfile API][clusterprofile-api-issues]
+* [Open an issue for a bug with multicluster-runtime][multicluster-runtime-issues]
 
 **NOTE**: If you're reporting a bug that applies to a specific implementation of
 a SIG-MC sponsored API and not the API specification itself, please check our
@@ -24,6 +25,7 @@ you can get help with your specific implementation.
 [mcs-api-issues]: https://github.com/kubernetes-sigs/mcs-api/issues
 [work-api-issues]: https://github.com/kubernetes-sigs/work-api/issues
 [clusterprofile-api-issues]: https://github.com/kubernetes-sigs/cluster-inventory-api/issues
+[multicluster-runtime-issues]: https://github.com/kubernetes-sigs/multicluster-runtime/issues
 [implementations]: ../guides/index.md
 
 ## Communications
