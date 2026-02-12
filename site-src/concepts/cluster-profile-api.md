@@ -28,8 +28,8 @@ a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a
 
 ## Access to member clusters (`status.accessProviders`)
 
-ClusterProfile describes a cluster, but it does not itself define a single universal way to authenticate to that cluster.
-Different environments use different credential sources (cloud IAM tokens, in-cluster Secrets, external identity systems, etc.).
+ClusterProfile describes a cluster, but it does not define a single universal way to authenticate to that cluster.
+Different environments have different credential sources (cloud IAM tokens, in-cluster Secrets, external identity systems, etc.).
 
 To make multicluster controllers interoperable, `status.accessProviders` standardizes the **reachability details** for a cluster
 and provides enough information for a consumer to select an **external credentials provider** mechanism (plugin) to obtain credentials.
