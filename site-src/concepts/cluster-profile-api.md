@@ -6,9 +6,10 @@ This document provides an overview of the [ClusterProfile API](https://github.co
 
 A Cluster Profile is a namespace-level resource and essentially represents an individual member of the Cluster Inventory
 that details properties and status of a cluster. This API proposes a standardized interface that defines how cluster information should be presented
-and interacted with across different platforms and implementations.
+and interacted with across different platforms and implementations, including a pluggable interface for implementations to define how credentials to 
+member cluster are retrieved.
 
-You can read more details about the API in the [KEP-4322](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md).
+You can read more details about the API in the [KEP-4322](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md) and about the plugin mechanism for cluster credentials in [KEP-5339](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/5339-clusterprofile-plugin-credentials).
 
 ## Terminology
 
@@ -25,6 +26,8 @@ a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a
 - **ClusterProfile API Consumer**: the person running the cluster managers
   or the person developing extensions for cluster managers for the purpose of
   workload distribution, operation management etc.
+
+- **(Credential) Plugins**: binaries that respond to the protocol defined in [KEP-5339](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/5339-clusterprofile-plugin-credentials) that can provide access credentials for individual clusters stored in the ClusterProfile API.
 
 ## API Example
 
@@ -43,6 +46,15 @@ spec:
   clusterManager:
     name: some-cluster-manager
 status:
+  accessProviders:
+  - name: secretreader
+    cluster:
+      server: https://<spoke-server>
+      certificate-authority-data: <BASE64_CA>
+      extensions:
+      - name: client.authentication.k8s.io/exec
+        extension:
+          clusterName: spoke-1
   version:
     kubernetes: 1.28.0
   properties:
@@ -60,3 +72,4 @@ status:
       lastTransitionTime: "2023-05-08T07:58:55Z"
       message: ""
 ```
+
