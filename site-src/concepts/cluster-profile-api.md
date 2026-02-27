@@ -16,11 +16,15 @@ You can read more details about the API in the [KEP-4322](https://github.com/kub
 a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a clusterSet if all its member clusters adhere to the 
 [namespace sameness](https://github.com/kubernetes/community/blob/master/sig-multicluster/namespace-sameness-position-statement.md) principle.
 
-- **Cluster Manager**: An entity that creates the ClusterProfile API object per member cluster,
-  and keeps their status up-to-date. Each cluster manager MUST be identified with a unique name.  
-  Each ClusterProfile resource SHOULD be managed by only one cluster manager. A cluster manager SHOULD
-  have sufficient permission to access the member cluster to fetch the information so it can update the status
-  of the ClusterProfile API resource.
+- **Cluster Manager**: An entity that creates the ClusterProfile API object per member cluster
+  and keeps their status up-to-date. Each cluster manager MUST be identified with a unique name;
+  each ClusterProfile SHOULD be owned by exactly one cluster manager (via `spec.clusterManager.name`
+  and the label `x-k8s.io/cluster-manager`). A cluster manager may use multiple internal controllers
+  or plugins to update different parts of `.status` (e.g. version, properties, conditions,
+  [accessProviders](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/5339-clusterprofile-plugin-credentials/README.md));
+  when multiple actors write status, use [Server-Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/)
+  with distinct field managers. Controllers select ClusterProfiles by the owning cluster manager
+  name (label or spec).
 
 - **ClusterProfile API Consumer**: the person running the cluster managers
   or the person developing extensions for cluster managers for the purpose of
