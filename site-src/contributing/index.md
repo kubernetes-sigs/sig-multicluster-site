@@ -26,7 +26,7 @@ you can get help with your specific implementation.
 [work-api-issues]: https://github.com/kubernetes-sigs/work-api/issues
 [clusterprofile-api-issues]: https://github.com/kubernetes-sigs/cluster-inventory-api/issues
 [multicluster-runtime-issues]: https://github.com/kubernetes-sigs/multicluster-runtime/issues
-[implementations]: ../guides/index.md
+[implementations]: ../implementations/index.md
 
 ## Communications
 

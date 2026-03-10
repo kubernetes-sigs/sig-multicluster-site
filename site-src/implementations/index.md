@@ -24,10 +24,6 @@ In this section you will find specific links to blog posts, documentation and ot
 [gke]:https://cloud.google.com/kubernetes-engine
 [gke-mcs]:https://cloud.google.com/kubernetes-engine/docs/concepts/multi-cluster-services
 
-Please follow this [guide][gke-mcs-guide] for the first steps to set up multicluster services on GKE.
-
-[gke-mcs-guide]:gke-mcs.md
-
 ### Submariner
 
 [Submariner][submariner] is an open-source project enabling direct networking between Pods and Services in different Kubernetes clusters, either on-premises or in the cloud.
@@ -46,7 +42,7 @@ The [AWS Cloud Map Multi-cluster Service Discovery Controller for Kubernetes (K8
 Please follow this [guide][aws-mcs-guide] for the first steps to set up the multicluster controller.
 
 [aws-mcs]: https://github.com/aws/aws-cloud-map-mcs-controller-for-k8s
-[aws-mcs-guide]: https://aws.github.io/aws-cloud-map-mcs-controller-for-k8s/
+[aws-mcs-guide]: https://aws.amazon.com/blogs/opensource/kubernetes-multi-cluster-service-discovery-using-open-source-aws-cloud-map-mcs-controller/
 [kep-1645]: https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api
 [kep-2149]: https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/2149-clusterid
 

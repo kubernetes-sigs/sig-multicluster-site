@@ -1,1 +1,0 @@
-# Multicluster API support in Gateway API
