@@ -19,7 +19,7 @@ plugins:
   - awesome-pages
   - redirects:
       redirect_maps:
-        'guides/getting-started.md': 'guides/index.md'
+        'guides/getting-started.md': 'implementations/index.md'
         'contributing/community.md': 'contributing/index.md'
 markdown_extensions:
   - admonition
@@ -40,9 +40,9 @@ nav:
     - Multicluster Services API Overview: concepts/multicluster-services-api.md
     - Work API Overview: concepts/work-api.md
     - ClusterProfile API Overview: concepts/cluster-profile-api.md
-  - Guides:
-    - Index: guides/index.md
-    - Implementation Guidelines: guides/guidelines.md
+  - Implementations:
+    - Index: implementations/index.md
+    - Implementation Guidelines: implementations/guidelines.md
   - Glossary:
     - Index: references/glossary/index.md
   - Reference:

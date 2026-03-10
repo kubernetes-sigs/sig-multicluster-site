@@ -75,7 +75,7 @@ Whether you are a user interested in using the different APIs or an implementer 
 * [Implementation guide and references][implementation-index]
 
 [kubecon-na-2022-video]: https://www.youtube.com/watch?v=VZnF3YO1cm8
-[implementation-index]: ./guides/index.md
+[implementation-index]: ./implementations/index.md
 
 * [Community links][get-involved]
 

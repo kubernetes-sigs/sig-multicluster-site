@@ -1,1 +1,0 @@
-# Getting started with GKE Multicluster Services
