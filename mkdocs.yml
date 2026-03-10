@@ -41,8 +41,8 @@ nav:
     - Work API Overview: concepts/work-api.md
     - ClusterProfile API Overview: concepts/cluster-profile-api.md
   - Implementations:
-    - Index: implementations/index.md
     - Implementation Guidelines: implementations/guidelines.md
+    - Multicluster Services Implementations: implementations/index.md
   - Glossary:
     - Index: references/glossary/index.md
   - Reference:

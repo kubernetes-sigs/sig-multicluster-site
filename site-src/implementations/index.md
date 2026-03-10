@@ -1,8 +1,8 @@
 # Implementations
 
-This document tracks downstream implementations and integrations of Multicluster API and provides status and resource references for them.
+This document tracks downstream implementations and integrations of Multicluster Services (MCS) API and provides status and resource references for them.
 
-Implementors and integrators of Multicluster API are encouraged to update this document with status information about their implementations, the versions they cover, and documentation to help users get started.
+Implementors and integrators of MCS API are encouraged to update this document with status information about their implementations, the versions they cover, and documentation to help users get started.
 
 ## Implementation Status
 
@@ -14,12 +14,12 @@ Implementors and integrators of Multicluster API are encouraged to update this d
 
 ## Implementations
 
-In this section you will find specific links to blog posts, documentation and other Multicluster API references for specific implementations.
+In this section you will find specific links to blog posts, documentation and other MCS API references for specific implementations.
 
 
 ### Google Kubernetes Engine
 
-[Google Kubernetes Engine (GKE)][gke] is a managed Kubernetes platform offered by Google Cloud. GKE's implementation of the Multicluster API is through the [GKE Multi Cluster Service][gke-mcs].
+[Google Kubernetes Engine (GKE)][gke] is a managed Kubernetes platform offered by Google Cloud. GKE's implementation of the MCS API is through the [GKE Multi Cluster Service][gke-mcs].
 
 [gke]:https://cloud.google.com/kubernetes-engine
 [gke-mcs]:https://cloud.google.com/kubernetes-engine/docs/concepts/multi-cluster-services
@@ -50,7 +50,7 @@ Please follow this [guide][aws-mcs-guide] for the first steps to set up the mult
 
 [Antrea][antrea] is an open-source project which is a Kubernetes networking solution intended to be Kubernetes native. It operates at Layer 3/4 to provide networking and security services for a Kubernetes cluster, leveraging Open vSwitch as the networking data plane.
 
-[Antrea Multi-cluster][antrea-mcs-arch] implements Multi-cluster Service API, which allows users to create multi-cluster Services that can be accessed cross clusters in a ClusterSet. Antrea Multi-cluster also extends Antrea native NetworkPolicy to support [Multi-cluster NetworkPolicy][antrea-mcs-anp] rules that apply to cross-cluster traffic, and [ClusterNetworkPolicy replication][antrea-mcs-cnp-replica] that allows a ClusterSet admin to create ClusterNetworkPolicies which are replicated across the entire ClusterSet and enforced in all member clusters.
+[Antrea Multi-cluster][antrea-mcs-arch] implements the MCS API, which allows users to create multi-cluster Services that can be accessed cross clusters in a ClusterSet. Antrea Multi-cluster also extends Antrea native NetworkPolicy to support [Multi-cluster NetworkPolicy][antrea-mcs-anp] rules that apply to cross-cluster traffic, and [ClusterNetworkPolicy replication][antrea-mcs-cnp-replica] that allows a ClusterSet admin to create ClusterNetworkPolicies which are replicated across the entire ClusterSet and enforced in all member clusters.
 
 Please follow this [guide][antrea-mcs-user-guide] for the first steps to set up Antrea Multi-cluster.
 
@@ -67,7 +67,7 @@ Please follow this [guide][antrea-mcs-user-guide] for the first steps to set up 
 
 [Cilium Cluster Mesh][cilium-clustermesh] allows you to connect the networks of multiple clusters in such as way that pods in each cluster can discover and access services in all other clusters of the mesh, provided all the clusters run Cilium as their CNI. This allows effectively joining multiple clusters into a large unified network, regardless of the Kubernetes distribution or location each of them is running.
 
-Starting with Cilium version 1.17, Cilium Cluster Mesh also supports MCS-API; see the corresponding [guide][cilium-mcs] for more information!
+Starting with Cilium version 1.17, Cilium Cluster Mesh also supports MCS API; see the corresponding [guide][cilium-mcs] for more information!
 
 [cilium]: https://cilium.io/
 [cilium-clustermesh]: https://cilium.io/use-cases/cluster-mesh/
