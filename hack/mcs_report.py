@@ -20,8 +20,6 @@ generate-conformance-matrix.py, which links to each generated page from the
 comparison matrix.
 """
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from dataclasses import field
 import html

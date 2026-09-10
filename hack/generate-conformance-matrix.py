@@ -33,8 +33,6 @@ site-src/
                 v0.5.0/gke/2026-07-01.md
 """
 
-from __future__ import annotations
-
 import pathlib
 from dataclasses import dataclass
 from dataclasses import field
