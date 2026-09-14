@@ -8,16 +8,18 @@ Implementors and integrators of the Cluster Inventory API are encouraged to upda
 
 The Cluster Inventory API has two kinds of implementations:
 
-- **Cluster Managers** publish `ClusterProfile` objects for the member clusters they register.
+- **Cluster Managers** publish `ClusterProfile` objects for the member clusters they register. The namespace where an object is published determines its inventory.
 - **ClusterProfile API Consumers** read `ClusterProfile` objects and use them to schedule, deploy, or operate workloads across clusters. The consumers listed below typically resolve per-cluster credentials via the [KEP-5339](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/5339-clusterprofile-plugin-credentials) exec credential plugin mechanism (often through the shared `sigs.k8s.io/cluster-inventory-api` library); some consumers additionally provide built-in credential shortcuts outside that mechanism for specific environments.
 
 ## Implementation Status
 
 ### Cluster Managers
 
-- [Open Cluster Management][ocm]: Available (shipped since OCM v0.15.0, enhanced in v1.2.0; PlacementDecision API support in progress)
-- [GKE Fleet (ClusterProfile sync)][gke-fleet-sync]: Preview (Google Cloud, announced May 2025)
-- [KubeFleet][kubefleet]: Available (shipped since KubeFleet v0.0.1, enhanced in v0.1.1)
+| Cluster manager | Status | Inventory namespace |
+| --- | --- | --- |
+| [Open Cluster Management][ocm] | Available since OCM v0.15.0; enhanced in v1.2.0 | Each namespace with a `ManagedClusterSetBinding` whose `Bound` condition is true; contains ClusterProfiles for the ManagedClusters in the bound sets |
+| [GKE Fleet (ClusterProfile sync)][gke-fleet-sync] | Preview; announced May 2025 | `fleet-cluster-inventory` by default; configurable with the `fleet-clusterinventory-namespace` label on the hub cluster |
+| [KubeFleet][kubefleet] | Available since v0.0.1; enhanced in v0.1.1 | `fleet-system` |
 
 ### ClusterProfile API Consumers
 
@@ -43,9 +45,9 @@ The consumer implementations target different layers:
 
 ### Open Cluster Management
 
-[Open Cluster Management (OCM)][ocm] is a CNCF sandbox project that provides multicluster management APIs and controllers for Kubernetes. OCM acts as a ClusterProfile provider: its [hub-side ClusterProfile reconciler][ocm-clusterprofile] synchronizes each registered `ManagedCluster` into a `ClusterProfile` object. OCM also supplies the `open-cluster-management` access provider through its [cluster-proxy][ocm-cluster-proxy] and [managed-serviceaccount][ocm-managed-sa] addons, allowing consumers to obtain credentials via the client-go exec credential plugin mechanism.
+[Open Cluster Management (OCM)][ocm] is a CNCF sandbox project that provides multicluster management APIs and controllers for Kubernetes. OCM acts as a ClusterProfile provider through its [hub-side ClusterProfile reconciler][ocm-clusterprofile]. OCM also supplies the `open-cluster-management` access provider through its [cluster-proxy][ocm-cluster-proxy] and [managed-serviceaccount][ocm-managed-sa] addons, allowing consumers to obtain credentials via the client-go exec credential plugin mechanism.
 
-Initial ClusterProfile support was introduced in [OCM v0.15.0 (October 2024)][ocm-v0-15]. The implementation was updated in [OCM v1.2.0 (February 2026)][ocm-v1-2], where the reconciler was refactored to sync from `ManagedClusterSet` and the `ClusterProfile` spec and status fields were revised.
+Initial ClusterProfile support was introduced in [OCM v0.15.0 (October 2024)][ocm-v0-15]. The implementation was updated in [OCM v1.2.0 (February 2026)][ocm-v1-2], where the reconciler was refactored to build each namespace's inventory from its bound `ManagedClusterSetBinding` objects and the `ClusterProfile` spec and status fields were revised.
 
 OCM is also tracking support for the SIG Multicluster [PlacementDecision API][kep-5313] in [open-cluster-management-io/ocm#1373][ocm-placementdecision-issue]. The proposal would allow OCM to produce standardized `PlacementDecision` objects from its placement results, giving third-party consumers such as Argo CD a common interface instead of provider-specific placement integrations. If completed, this could make OCM one of the first cluster managers to produce standardized SIG Multicluster placement decisions.
 
@@ -60,7 +62,7 @@ OCM is also tracking support for the SIG Multicluster [PlacementDecision API][ke
 
 ### GKE Fleet (ClusterProfile sync)
 
-[GKE Fleet][gke-fleet] is Google Cloud's fleet management layer for Google Kubernetes Engine. Its [ClusterProfile sync][gke-fleet-sync] feature, available in Preview under the Pre-GA Offerings Terms, acts as a ClusterProfile provider: Fleet is the source of truth, and fleet membership changes (additions, updates, and deletions) are one-way synchronized to `ClusterProfile` objects on a designated hub cluster. Generated profiles are published in the `fleet-cluster-inventory` namespace by default and carry the label `x-k8s.io/cluster-manager=gke-fleet`.
+[GKE Fleet][gke-fleet] is Google Cloud's fleet management layer for Google Kubernetes Engine. Its [ClusterProfile sync][gke-fleet-sync] feature, available in Preview under the Pre-GA Offerings Terms, acts as a ClusterProfile provider: Fleet is the source of truth, and fleet membership changes (additions, updates, and deletions) are one-way synchronized to `ClusterProfile` objects on a designated hub cluster. Generated profiles carry the label `x-k8s.io/cluster-manager=gke-fleet`.
 
 The feature was announced in the [May 8, 2025 GKE release notes][gke-fleet-sync-release]. To enable it, an operator designates a GKE cluster as the hub by setting the `fleet-clusterinventory-management-cluster=true` label. The documented procedure currently targets GKE clusters; behavior for non-GKE fleet members (such as attached clusters) is not covered by the Preview documentation. Google documents the [Argo CD ClusterProfile Syncer][gke-argocd-syncer] and [Multi-cluster Orchestrator][gke-mco] as example consumers; the syncer is a GKE-focused, Google-maintained integration, distinct from the [Argo CD](#argo-cd) integration described below.
 
@@ -72,7 +74,7 @@ The feature was announced in the [May 8, 2025 GKE release notes][gke-fleet-sync-
 
 ### KubeFleet
 
-[KubeFleet][kubefleet] is a CNCF sandbox project for multicluster application management. KubeFleet acts as a ClusterProfile provider: the hub agent's [ClusterProfile controller][kubefleet-controller] synchronizes each joined `MemberCluster` into a `ClusterProfile` object, published by default in the `fleet-system` namespace and labeled `x-k8s.io/cluster-manager=KubeFleet`. Generated profiles carry an `accessProviders` entry with the member cluster's API server endpoint and CA data.
+[KubeFleet][kubefleet] is a CNCF sandbox project for multicluster application management. KubeFleet acts as a ClusterProfile provider: the hub agent's [ClusterProfile controller][kubefleet-controller] synchronizes each joined `MemberCluster` into a `ClusterProfile` object. Generated profiles carry the label `x-k8s.io/cluster-manager=KubeFleet` and include an `accessProviders` entry with the member cluster's API server endpoint and CA data.
 
 The integration is enabled by default in the hub agent and controlled by the `--enable-cluster-inventory-apis` flag. ClusterProfile generation has shipped since the first KubeFleet release, [v0.0.1 (April 2025)][kubefleet-v0-0-1], and ClusterProfile status reporting (including `accessProviders`) was expanded in [v0.1.1 (December 2025)][kubefleet-v0-1-1].
 
