@@ -2,33 +2,101 @@
 
 This document provides an overview of the [ClusterProfile API](https://github.com/kubernetes-sigs/cluster-inventory-api?tab=readme-ov-file#cluster-profile-api).
 
-![Alt](../images/cluster-profile-api.png "ClusterProfile API")
-
-A Cluster Profile is a namespace-level resource and essentially represents an individual member of the Cluster Inventory
-that details properties and status of a cluster. This API proposes a standardized interface that defines how cluster information should be presented
-and interacted with across different platforms and [implementations](../implementations/cluster-inventory-api-implementations.md).
+ClusterProfile is a namespace-scoped resource that describes one member cluster.
+It gives cluster managers and consumers a common way to publish and read cluster
+properties, status, and access information across
+[implementations](../implementations/cluster-inventory-api-implementations.md).
 
 You can read more details about the API in the [KEP-4322](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md).
 
 ## Terminology
 
-- **Cluster Inventory**: A conceptual term referring to a collection of clusters. A cluster inventory may or may not represent
-a [ClusterSet](../api-types/cluster-set.md). A cluster inventory is considered a clusterSet if all its member clusters adhere to the 
-[namespace sameness](https://github.com/kubernetes/community/blob/master/sig-multicluster/namespace-sameness-position-statement.md) principle.
+- **Cluster Inventory**: The ClusterProfile objects in one namespace. See
+  [Cluster inventories](#cluster-inventories).
 
-- **Cluster Manager**: An entity that creates the ClusterProfile API object per member cluster
-  and keeps their status up-to-date. Each cluster manager MUST be identified with a unique name;
-  each ClusterProfile SHOULD be owned by exactly one cluster manager (via `spec.clusterManager.name`
-  and the label `x-k8s.io/cluster-manager`). A cluster manager may use multiple internal controllers
-  or plugins to update different parts of `.status` (e.g. version, properties, conditions,
-  [accessProviders](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/5339-clusterprofile-plugin-credentials/README.md));
-  when multiple actors write status, use [Server-Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/)
-  with distinct field managers. Controllers select ClusterProfiles by the owning cluster manager
-  name (label or spec).
+- **Member Cluster**: A Kubernetes cluster represented by a ClusterProfile in a cluster inventory.
 
-- **ClusterProfile API Consumer**: the person running the cluster managers
-  or the person developing extensions for cluster managers for the purpose of
-  workload distribution, operation management etc.
+- **Cluster Manager**: A controller that creates a ClusterProfile for each
+  member cluster and keeps its status up to date. Each cluster manager MUST
+  have a unique name, recorded in `spec.clusterManager.name`. Each
+  ClusterProfile MUST include the `x-k8s.io/cluster-manager` label with the same
+  value. If multiple controllers update status, they use [Server-Side
+  Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/)
+  with distinct field managers.
+
+- **ClusterProfile API Consumer**: A controller or tool that reads
+  ClusterProfile objects to discover, connect to, or operate on member
+  clusters.
+
+## Cluster inventories
+
+A hub cluster can host multiple inventories in separate namespaces. This gives
+consumers a single integration point and lets administrators use
+namespace-based RBAC to grant each consumer access only to the inventory it
+needs.
+
+Inventories can be organized per consumer. In the following example, Argo CD
+reads the `argocd` inventory containing the dev, staging, and prod clusters.
+MultiKueue reads the `kueue` inventory containing the prod and batch clusters.
+The prod cluster appears in both inventories, represented by one ClusterProfile
+in each namespace.
+
+![ClusterProfile inventories for Argo CD and MultiKueue on a hub cluster, with the prod cluster represented in both](../images/cluster-profile-api.svg "Cluster managers, inventories, consumers, and member clusters")
+
+Cluster managers differ in how they choose the namespace where they publish
+ClusterProfiles. See [Cluster Inventory API
+implementations](../implementations/cluster-inventory-api-implementations.md)
+for current behavior.
+
+A cluster inventory is independent of a
+[ClusterSet](../api-types/cluster-set.md). The `clusterset.k8s.io` property
+records ClusterSet membership, not the inventories where a member cluster
+appears.
+
+Within an inventory, a member cluster SHOULD be represented by at most one
+ClusterProfile, although the same member cluster can appear in different
+inventories.
+
+### Identifying duplicate ClusterProfiles
+
+Cluster managers SHOULD add the
+`multicluster.x-k8s.io/inventory-member-id` label to each ClusterProfile. The
+label MUST have a non-empty value when set, and cluster managers SHOULD keep the
+value unchanged while the ClusterProfile represents the same member cluster.
+The platform administrator SHOULD coordinate values on the hub so that
+ClusterProfiles for the same member cluster use the same value and those for
+different member clusters use different values.
+
+A consumer SHOULD compare only the ClusterProfiles selected by its configuration,
+such as inventory namespaces, label selectors, or object references. It SHOULD
+deduplicate them only when its actions would conflict. Objects outside the
+selected set do not affect that consumer and need not be listed or watched solely
+for deduplication.
+
+[![A consumer selects one of two ClusterProfiles with the same inventory member ID; the unselected duplicate does not affect the consumer or cause a warning](../images/cluster-profile-deduplication-selection.svg "Duplicates outside a consumer's selected set")](../images/cluster-profile-deduplication-selection.svg)
+
+Selecting multiple ClusterProfiles with the same inventory member ID does not
+by itself require deduplication. If the consumer can act on all selected objects
+without the actions conflicting, it can act on all of them without a warning.
+If the actions would conflict, the consumer SHOULD act only on the oldest
+object. For conflicting objects in the same inventory, it SHOULD warn until the
+platform administrator removes the duplicates.
+
+[![Two selected ClusterProfiles with the same inventory member ID are safe when their actions are disjoint; conflicting actions are deduplicated and produce a warning](../images/cluster-profile-deduplication-conflicts.svg "Conflict-aware handling of selected duplicates")](../images/cluster-profile-deduplication-conflicts.svg)
+
+The following cases need additional handling:
+
+| Situation | Behavior |
+| --- | --- |
+| Two or more conflicting objects share the oldest `creationTimestamp` | The consumer SHOULD NOT act on any of the tied objects. |
+| The label is missing or empty | Treat it as absent; do not correlate or deduplicate the object using this mechanism. |
+| The same ID appears in different inventories | The objects do not require deletion or a warning solely because they share the ID. If selected, the consumer still applies the conflict rule above. |
+
+Regardless of consumer selection or conflicts, the platform administrator SHOULD
+delete all but one ClusterProfile for the same member cluster from each inventory.
+See
+[KEP-4322](https://github.com/kubernetes/enhancements/blob/master/keps/sig-multicluster/4322-cluster-inventory/README.md#uniqueness-of-the-clusterprofile-object)
+for the normative requirements.
 
 ## Access to member clusters (`status.accessProviders`)
 
@@ -64,20 +132,21 @@ See the reference for the exact schema and semantics:
 [CRD definition](https://github.com/kubernetes-sigs/cluster-inventory-api/blob/main/config/crd/bases/multicluster.x-k8s.io_clusterprofiles.yaml)
 
 ```yaml
-apiVersion: multicluster.x-k8s.io/v1alpha1
+apiVersion: multicluster.x-k8s.io/v1alpha2
 kind: ClusterProfile
 metadata:
   name: some-cluster-name
   namespace: fleet-system
   labels:
     x-k8s.io/cluster-manager: some-cluster-manager
+    multicluster.x-k8s.io/inventory-member-id: cluster-us-east
 spec:
   displayName: some-cluster
   clusterManager:
     name: some-cluster-manager
 status:
   version:
-    kubernetes: 1.28.0
+    kubernetes: "1.28.0"
   properties:
     - name: clusterset.k8s.io
       value: some-clusterset
@@ -94,11 +163,13 @@ status:
               clusterName: some-cluster-name
   conditions:
     - type: ControlPlaneHealthy
-      status: True
+      status: "True"
+      reason: AsExpected
       lastTransitionTime: "2023-05-08T07:56:55Z"
       message: ""
     - type: Joined
-      status: True
+      status: "True"
+      reason: ClusterRegistered
       lastTransitionTime: "2023-05-08T07:58:55Z"
       message: ""
 ```

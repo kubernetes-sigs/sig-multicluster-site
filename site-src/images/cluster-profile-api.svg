@@ -1,0 +1,94 @@
+<svg version="1.1" viewBox="0 0 960 530" fill="none" stroke="none" xmlns="http://www.w3.org/2000/svg">
+  <title>ClusterProfile inventories on a hub cluster</title>
+  <desc>A cluster manager publishes ClusterProfiles to the argocd and kueue namespace inventories. Argo CD and MultiKueue read their respective inventories. Each ClusterProfile represents a member cluster, and the prod cluster appears in both inventories.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#595959"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#674ea7"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="530" fill="#ffffff"/>
+
+  <!-- cluster manager -->
+  <rect x="360" y="20" width="240" height="58" rx="29" fill="#ffffff" stroke="#595959" stroke-width="1.5"/>
+  <text x="480" y="55" font-family="Arial, sans-serif" font-size="17" fill="#000000" text-anchor="middle">Cluster manager</text>
+
+  <!-- hub cluster -->
+  <rect x="160" y="110" width="640" height="200" rx="8" fill="#f3f3f3" stroke="#595959" stroke-width="1.5"/>
+  <text x="480" y="136" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#000000" text-anchor="middle">Hub cluster</text>
+
+  <!-- manager publication arrows -->
+  <path d="M 455 78 L 365 150" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 505 78 L 670 150" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="347" y="108" font-family="Arial, sans-serif" font-size="12" fill="#595959" text-anchor="middle">creates / updates</text>
+  <text x="650" y="108" font-family="Arial, sans-serif" font-size="12" fill="#595959" text-anchor="middle">creates / updates</text>
+
+  <!-- argocd inventory -->
+  <rect x="185" y="155" width="365" height="135" rx="7" fill="#ffffff" stroke="#674ea7" stroke-width="1.7" stroke-dasharray="7 4"/>
+  <text x="207" y="183" font-family="Arial, sans-serif" font-size="13" font-style="italic" fill="#674ea7">inventory: namespace "argocd"</text>
+
+  <rect x="205" y="205" width="100" height="62" rx="4" fill="#d9ead3" stroke="#595959" stroke-width="1"/>
+  <text x="255" y="229" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="255" y="250" font-family="monospace" font-size="13" font-weight="600" fill="#000000" text-anchor="middle">dev</text>
+
+  <rect x="317" y="205" width="100" height="62" rx="4" fill="#fff2cc" stroke="#595959" stroke-width="1"/>
+  <text x="367" y="229" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="367" y="250" font-family="monospace" font-size="13" font-weight="600" fill="#000000" text-anchor="middle">staging</text>
+
+  <rect x="429" y="205" width="100" height="62" rx="4" fill="#c9daf8" stroke="#595959" stroke-width="1"/>
+  <text x="479" y="229" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="479" y="250" font-family="monospace" font-size="13" font-weight="600" fill="#000000" text-anchor="middle">prod</text>
+
+  <!-- kueue inventory -->
+  <rect x="570" y="155" width="205" height="135" rx="7" fill="#ffffff" stroke="#674ea7" stroke-width="1.7" stroke-dasharray="7 4"/>
+  <text x="592" y="183" font-family="Arial, sans-serif" font-size="13" font-style="italic" fill="#674ea7">inventory: namespace "kueue"</text>
+
+  <rect x="578" y="205" width="90" height="62" rx="4" fill="#c9daf8" stroke="#595959" stroke-width="1"/>
+  <text x="623" y="229" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="623" y="250" font-family="monospace" font-size="13" font-weight="600" fill="#000000" text-anchor="middle">prod</text>
+
+  <rect x="677" y="205" width="90" height="62" rx="4" fill="#f4cccc" stroke="#595959" stroke-width="1"/>
+  <text x="722" y="229" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="722" y="250" font-family="monospace" font-size="13" font-weight="600" fill="#000000" text-anchor="middle">batch</text>
+
+  <!-- the prod ClusterProfiles represent the same member cluster -->
+  <path d="M 529 236 L 578 236" stroke="#595959" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <path d="M 553.5 236 L 553.5 292" stroke="#595959" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="553.5" y="304" font-family="Arial, sans-serif" font-size="12" fill="#595959" text-anchor="middle">same member cluster in both inventories</text>
+
+  <!-- consumers -->
+  <rect x="18" y="218" width="115" height="58" rx="29" fill="#ffffff" stroke="#595959" stroke-width="1.5"/>
+  <text x="75.5" y="252" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Argo CD</text>
+  <line x1="133" y1="247" x2="181" y2="247" stroke="#674ea7" stroke-width="1.7" marker-end="url(#arrow-purple)"/>
+  <text x="157" y="236" font-family="Arial, sans-serif" font-size="12" fill="#674ea7" text-anchor="middle">reads</text>
+
+  <rect x="827" y="218" width="115" height="58" rx="29" fill="#ffffff" stroke="#595959" stroke-width="1.5"/>
+  <text x="884.5" y="252" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">MultiKueue</text>
+  <line x1="827" y1="247" x2="779" y2="247" stroke="#674ea7" stroke-width="1.7" marker-end="url(#arrow-purple)"/>
+  <text x="803" y="236" font-family="Arial, sans-serif" font-size="12" fill="#674ea7" text-anchor="middle">reads</text>
+
+  <!-- member clusters -->
+  <rect x="120" y="430" width="140" height="65" rx="5" fill="#d9ead3" stroke="#595959" stroke-width="1.2"/>
+  <text x="190" y="468" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Dev cluster</text>
+
+  <rect x="310" y="430" width="140" height="65" rx="5" fill="#fff2cc" stroke="#595959" stroke-width="1.2"/>
+  <text x="380" y="468" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Staging cluster</text>
+
+  <rect x="500" y="430" width="140" height="65" rx="5" fill="#c9daf8" stroke="#595959" stroke-width="1.2"/>
+  <text x="570" y="468" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Prod cluster</text>
+
+  <rect x="690" y="430" width="140" height="65" rx="5" fill="#f4cccc" stroke="#595959" stroke-width="1.2"/>
+  <text x="760" y="468" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Batch cluster</text>
+
+  <!-- ClusterProfile-to-member-cluster relationships -->
+  <path d="M 255 267 L 190 426" stroke="#595959" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M 367 267 L 380 426" stroke="#595959" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M 479 267 L 558 426" stroke="#595959" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M 623 267 L 582 426" stroke="#595959" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M 722 267 L 760 426" stroke="#595959" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <text x="480" y="375" font-family="Arial, sans-serif" font-size="14" fill="#595959" paint-order="stroke" stroke="#ffffff" stroke-width="8" text-anchor="middle">Each ClusterProfile represents one member cluster</text>
+</svg>

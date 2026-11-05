@@ -1,0 +1,54 @@
+<svg version="1.1" viewBox="0 0 960 560" fill="none" stroke="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Duplicates outside a consumer's selected set</title>
+  <desc>A consumer selects prod-team-a in inventory-a by namespace and label. Prod-team-b has the same inventory member ID but is outside the configured selection, so the consumer does not compare it, warn about it, or fetch it solely for deduplication.</desc>
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#674ea7"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="560" fill="#ffffff"/>
+  <text x="480" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#000000" text-anchor="middle">A duplicate outside the selected set does not affect the consumer</text>
+
+  <!-- consumer configuration -->
+  <rect x="20" y="132" width="250" height="220" rx="8" fill="#d9ead3" stroke="#595959" stroke-width="1.5"/>
+  <text x="145" y="164" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="#000000" text-anchor="middle">Consumer configuration</text>
+  <line x1="42" y1="178" x2="248" y2="178" stroke="#93a88d" stroke-width="1"/>
+  <text x="44" y="208" font-family="monospace" font-size="14" fill="#000000">namespace: inventory-a</text>
+  <text x="44" y="236" font-family="monospace" font-size="14" fill="#000000">selector: team=blue</text>
+  <text x="44" y="282" font-family="Arial, sans-serif" font-size="13" fill="#595959">Selection may use namespaces,</text>
+  <text x="44" y="304" font-family="Arial, sans-serif" font-size="13" fill="#595959">label selectors, or object refs.</text>
+
+  <!-- hub and inventory -->
+  <rect x="320" y="68" width="620" height="330" rx="8" fill="#f3f3f3" stroke="#595959" stroke-width="1.5"/>
+  <text x="630" y="94" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#000000" text-anchor="middle">Hub cluster</text>
+  <rect x="345" y="112" width="570" height="255" rx="7" fill="#ffffff" stroke="#674ea7" stroke-width="1.7" stroke-dasharray="7 4"/>
+  <text x="367" y="140" font-family="Arial, sans-serif" font-size="13" font-style="italic" fill="#674ea7">inventory: namespace "inventory-a"</text>
+  <text x="630" y="357" font-family="Arial, sans-serif" font-size="13" fill="#595959" text-anchor="middle">Both objects claim inventory-member-id: prod-cluster</text>
+
+  <!-- selection arrow, drawn above the hub background -->
+  <path d="M 270 238 L 365 238" stroke="#674ea7" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <text x="318" y="224" font-family="Arial, sans-serif" font-size="13" fill="#674ea7" text-anchor="middle">selects</text>
+
+  <!-- selected profile -->
+  <rect x="375" y="170" width="230" height="165" rx="6" fill="#c9daf8" stroke="#674ea7" stroke-width="2.5"/>
+  <text x="490" y="198" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="395" y="226" font-family="monospace" font-size="13" fill="#000000">name: prod-team-a</text>
+  <text x="395" y="251" font-family="monospace" font-size="13" fill="#000000">id: prod-cluster</text>
+  <text x="395" y="276" font-family="monospace" font-size="13" fill="#000000">team: blue</text>
+  <text x="490" y="311" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#38761d" text-anchor="middle">✓ SELECTED</text>
+
+  <!-- unselected duplicate -->
+  <rect x="650" y="170" width="230" height="165" rx="6" fill="#eeeeee" stroke="#777777" stroke-width="1.7" stroke-dasharray="6 4"/>
+  <text x="765" y="198" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#595959" text-anchor="middle">ClusterProfile</text>
+  <text x="670" y="226" font-family="monospace" font-size="13" fill="#595959">name: prod-team-b</text>
+  <text x="670" y="251" font-family="monospace" font-size="13" fill="#595959">id: prod-cluster</text>
+  <text x="670" y="276" font-family="monospace" font-size="13" fill="#595959">team: red</text>
+  <text x="765" y="311" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#777777" text-anchor="middle">NOT SELECTED</text>
+
+  <!-- result -->
+  <rect x="320" y="425" width="620" height="108" rx="8" fill="#d9ead3" stroke="#38761d" stroke-width="1.7"/>
+  <text x="345" y="455" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#274e13">Consumer result: safe</text>
+  <text x="345" y="482" font-family="Arial, sans-serif" font-size="14" fill="#000000">Compare only prod-team-a. The unselected duplicate has no effect and causes no warning.</text>
+  <text x="345" y="507" font-family="Arial, sans-serif" font-size="14" fill="#000000">No additional list or watch is needed solely to discover objects outside the selection.</text>
+</svg>

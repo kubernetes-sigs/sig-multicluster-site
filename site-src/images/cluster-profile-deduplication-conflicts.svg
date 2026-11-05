@@ -1,0 +1,79 @@
+<svg version="1.1" viewBox="0 0 960 720" fill="none" stroke="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Conflict-aware handling of selected duplicates</title>
+  <desc>A consumer selects two ClusterProfiles in the same inventory with the same inventory member ID. If their actions target disjoint resources, it acts on both without a warning. If their actions conflict, it acts only on the oldest object, warns, and waits for the platform administrator to remove the extra object.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#595959"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#38761d"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#990000"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="720" fill="#ffffff"/>
+  <text x="480" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#000000" text-anchor="middle">Selected duplicates are deduplicated only when their actions conflict</text>
+
+  <!-- selected set -->
+  <rect x="150" y="58" width="660" height="277" rx="8" fill="#f3f3f3" stroke="#674ea7" stroke-width="1.7" stroke-dasharray="7 4"/>
+  <text x="177" y="86" font-family="Arial, sans-serif" font-size="13" font-style="italic" fill="#674ea7">selected set: namespace "inventory-a"</text>
+  <text x="480" y="323" font-family="Arial, sans-serif" font-size="13" fill="#595959" text-anchor="middle">Same inventory-member-id: prod-cluster</text>
+
+  <rect x="190" y="112" width="260" height="190" rx="6" fill="#c9daf8" stroke="#674ea7" stroke-width="2"/>
+  <text x="320" y="140" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="212" y="168" font-family="monospace" font-size="13" fill="#000000">name: prod-team-a</text>
+  <text x="212" y="193" font-family="monospace" font-size="13" fill="#000000">id: prod-cluster</text>
+  <text x="212" y="218" font-family="monospace" font-size="13" fill="#000000">created: 09:00</text>
+  <text x="212" y="243" font-family="monospace" font-size="13" fill="#000000">source: team-a/</text>
+  <text x="320" y="278" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#38761d" text-anchor="middle">✓ SELECTED</text>
+
+  <rect x="510" y="112" width="260" height="190" rx="6" fill="#c9daf8" stroke="#674ea7" stroke-width="2"/>
+  <text x="640" y="140" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#000000" text-anchor="middle">ClusterProfile</text>
+  <text x="532" y="168" font-family="monospace" font-size="13" fill="#000000">name: prod-team-b</text>
+  <text x="532" y="193" font-family="monospace" font-size="13" fill="#000000">id: prod-cluster</text>
+  <text x="532" y="218" font-family="monospace" font-size="13" fill="#000000">created: 10:00</text>
+  <text x="532" y="243" font-family="monospace" font-size="13" fill="#000000">source: team-b/</text>
+  <text x="640" y="278" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#38761d" text-anchor="middle">✓ SELECTED</text>
+
+  <!-- conflict decision -->
+  <path d="M 480 335 L 480 371" stroke="#595959" stroke-width="1.7" marker-end="url(#arrow)"/>
+  <rect x="335" y="376" width="290" height="55" rx="27" fill="#fff2cc" stroke="#bf9000" stroke-width="1.7"/>
+  <text x="480" y="410" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#000000" text-anchor="middle">Would the actions conflict?</text>
+
+  <path d="M 405 431 L 255 471" stroke="#38761d" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+  <text x="333" y="449" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#38761d">NO</text>
+  <path d="M 555 431 L 705 471" stroke="#990000" stroke-width="1.8" marker-end="url(#arrow-red)"/>
+  <text x="617" y="449" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#990000">YES</text>
+
+  <!-- no conflict outcome: parallel arrows to two separate targets -->
+  <rect x="30" y="476" width="420" height="220" rx="8" fill="#d9ead3" stroke="#38761d" stroke-width="1.8"/>
+  <text x="240" y="507" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="#274e13" text-anchor="middle">✓ SAFE: disjoint actions</text>
+  <text x="58" y="548" font-family="monospace" font-size="13" fill="#000000">prod-team-a</text>
+  <text x="58" y="582" font-family="monospace" font-size="13" fill="#000000">prod-team-b</text>
+  <line x1="152" y1="543" x2="242" y2="543" stroke="#38761d" stroke-width="1.6" marker-end="url(#arrow-green)"/>
+  <line x1="152" y1="577" x2="242" y2="577" stroke="#38761d" stroke-width="1.6" marker-end="url(#arrow-green)"/>
+  <rect x="246" y="529" width="96" height="28" rx="4" fill="#ffffff" stroke="#38761d" stroke-width="1.4"/>
+  <text x="294" y="548" font-family="monospace" font-size="13" fill="#000000" text-anchor="middle">team-a/</text>
+  <rect x="246" y="563" width="96" height="28" rx="4" fill="#ffffff" stroke="#38761d" stroke-width="1.4"/>
+  <text x="294" y="582" font-family="monospace" font-size="13" fill="#000000" text-anchor="middle">team-b/</text>
+  <line x1="58" y1="603" x2="422" y2="603" stroke="#93a88d" stroke-width="1"/>
+  <text x="58" y="628" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#000000">Act on both ClusterProfiles.</text>
+  <text x="58" y="652" font-family="Arial, sans-serif" font-size="14" fill="#000000">No deduplication and no consumer warning.</text>
+  <text x="58" y="675" font-family="Arial, sans-serif" font-size="13" fill="#595959">The platform administrator still owns inventory cleanup.</text>
+
+  <!-- conflict outcome: both arrows converge on one target -->
+  <rect x="510" y="476" width="420" height="220" rx="8" fill="#f4cccc" stroke="#990000" stroke-width="1.8"/>
+  <text x="720" y="507" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="#990000" text-anchor="middle">⚠ CONFLICT: same target</text>
+  <text x="538" y="548" font-family="monospace" font-size="13" fill="#000000">prod-team-a</text>
+  <text x="538" y="582" font-family="monospace" font-size="13" fill="#000000">prod-team-b</text>
+  <line x1="632" y1="543" x2="710" y2="555" stroke="#990000" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+  <line x1="632" y1="577" x2="710" y2="565" stroke="#990000" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+  <rect x="716" y="546" width="150" height="28" rx="4" fill="#ffffff" stroke="#990000" stroke-width="1.4"/>
+  <text x="791" y="565" font-family="monospace" font-size="13" fill="#000000" text-anchor="middle">Deployment/prod</text>
+  <line x1="538" y1="603" x2="902" y2="603" stroke="#cc8888" stroke-width="1"/>
+  <text x="538" y="628" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#000000">Act only on prod-team-a (the oldest).</text>
+  <text x="538" y="652" font-family="Arial, sans-serif" font-size="14" fill="#000000">Warn until the administrator removes the extra object.</text>
+  <text x="538" y="675" font-family="Arial, sans-serif" font-size="13" fill="#595959">If the oldest timestamps tie, act on neither object.</text>
+</svg>
